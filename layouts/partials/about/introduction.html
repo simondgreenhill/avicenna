@@ -18,8 +18,8 @@
     <div class="row w-100 justify-content-center">
         {{ range $key, $value := $aboutPage.Params.affiliations }}
         <div class="row w-100 justify-content-center" id="title-name">
-            <span class="main_color" id="title">
-                {{$value.affiliation.title}},
+            <span class="text-muted" id="title">
+                {{$value.affiliation.title}} at
             </span>
             <span id="name" class="text-muted">
                 {{$value.affiliation.name}}
