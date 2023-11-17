@@ -5,7 +5,7 @@ body {
 }
 
 a {
-    color: #363e4a;
+    color: blue;
 }
 
 a:hover {
@@ -16,7 +16,7 @@ a:hover {
 h2 code {
   font-family: Consolas,"courier new";
   /* background-color: #f1f1f1; */
-  background-color:  #363e4a;;
+  background-color:  blue;;
   color: white;
   padding: 2px;
 }
@@ -51,8 +51,16 @@ h2 code {
     color: #363e4a;
 }
 
+.link_color {
+    color: blue
+}
+
+.italic {
+    font-style: italic;
+}
+
 .secondary_color {
-    color: #363e4a;
+    color: blue;
 }
 
 .email_color {
@@ -139,13 +147,13 @@ h2 code {
     margin-top: 1.5%;
 }
 
-.publication .section-1 .publication-date {
+/* .publication .section-1 .publication-date {
     font-family: 'Ubuntu Mono', serif;
 }
 
 .publication .section-1 .publication-name {
     font-family: 'Ubuntu Mono', serif;
-}
+} */
 
 
 .publication .section-2 {
@@ -157,8 +165,8 @@ h2 code {
 
 .publication .section-3 {
     margin-top: -.5%;
-    font-family: 'Ubuntu Mono', serif;
-    text-decoration: none;
+    /* font-family: 'Ubuntu Mono', serif;
+    text-decoration: none; */
 }
 
 .publication .section-3 a{
@@ -183,6 +191,49 @@ h2 code {
     margin-top: 1.5%;
 }
 
+/* .publication .section-1 .publication-date {
+    font-family: 'Ubuntu Mono', serif;
+}
+
+.publication .section-1 .publication-name {
+    font-family: 'Ubuntu Mono', serif;
+} */
+
+
+.project .section-2 {
+    font-family: 'Ubuntu Mono', serif;
+    margin-top: -.1%;
+    margin-bottom: .5%;
+}
+
+
+.project .section-3 {
+    margin-top: -.5%;
+    /* font-family: 'Ubuntu Mono', serif;
+    text-decoration: none; */
+}
+
+.project .section-3 a{
+    padding: .15%;
+}
+
+.project .section-3 a:hover {
+    transition-property: background-color;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+
+    border-radius: 50%;
+    background-color: #d64933;
+    color: white;
+}
+
+.project .separator {
+    margin-left: -1%;
+}
+/* .projects .project {
+    margin-top: 1.5%;
+}
+
 .project .section-2 a {
     padding: .8%;
     margin-left: -.1%;
@@ -200,7 +251,7 @@ h2 code {
     border-radius: 50%;
     background-color: #d64933;
     color: white;
-}
+} */
 
 
 .section-title {
@@ -221,12 +272,12 @@ h2 code {
 
 .pagination .page_link  {
     font-weight: bold;
-    background-color: #363e4a;
+    background-color: blue;
 }
 
 .page-item.active .page-link {
     border-color: black;
-    background-color: #363e4a;
+    background-color: blue;
     font-weight: bold;
     color: white;
 }
@@ -238,7 +289,7 @@ h2 code {
 .tags_navigation .tag {
     font-family: 'Ubuntu Mono', serif;
     padding: .15%;
-    background-color: #363e4a;
+    background-color: blue;
     color: aliceblue;
     padding-left: .5%;
     padding-right: .5%;
