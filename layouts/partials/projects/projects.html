@@ -9,34 +9,45 @@
         {{ range $page := $rscPages}}
         <div class="project row  w-100">
 
+            {{/* --- Start of updated title section --- */}}
             {{if $page.Params.publication}}
                 <div class="section-1 w-100">
-                    {{$page.Params.title}} ({{$page.Params.status}}<span class='italic'> {{$page.Params.publication}}</span>).
+                    {{ if $page.Params.project_link -}}
+                        <a class="link_color" href="{{ $page.Params.project_link }}">{{ $page.Params.title }}</a>
+                    {{- else -}}
+                        {{ $page.Params.title }}
+                    {{- end }} ({{$page.Params.status | markdownify}}<span class='italic'> {{$page.Params.publication}}</span>).
                 </div>
                 <div></div>
             {{else}}
                 <div class="section-1 w-100">
-                    {{$page.Params.title}} ({{$page.Params.status}}).
+                    {{ if $page.Params.project_link -}}
+                        <a class="link_color" href="{{ $page.Params.project_link }}">{{ $page.Params.title }}</a>
+                    {{- else -}}
+                        {{ $page.Params.title }}
+                    {{- end }} ({{$page.Params.status | markdownify}}).
                 </div>
                 <div></div>
             {{end}}
+            {{/* --- End of updated title section --- */}}
+
 
             <div class="section-2 text-muted w-100">
-
                 {{ $authors := $page.Params.authors }}
-
                 {{ if $authors }}
+                {{/* --- Start of updated logic --- */}}
                 {{range $i, $author := $authors}}
-                <span>
-                    {{$author}}  
-                </span>
-                {{ if lt $i (sub (len $authors) 1)}}
-                <span class="separator">, 
-                </span>
+                    {{- if strings.HasPrefix $author "Simon Greenhill" -}}
+                        <span class="me">{{$author}}</span>
+                    {{- else -}}
+                        <span>{{$author}}</span>
+                    {{- end -}}
+                    {{- if lt $i (sub (len $authors) 1) -}}
+                        <span class="separator">, </span>
+                    {{- end -}}
                 {{end}}
+                {{/* --- End of updated logic --- */}}
                 {{end}}
-                {{end}}
-
             </div>
 
             {{ $links := $page.Params.links }}
@@ -45,8 +56,7 @@
                 {{range $link_name, $link_url := $links}}
                     {{ if $link_url }}
                 <a class="main_color text-decoration-none rounded" href="{{$link_url}}" target="_blank">
-                <!-- <a class="main_color" href="{{$link_url}}" target="_blank"></a> -->
-                    {{ $link_name | title}}
+                {{ $link_name | title}}
                 </a>
                     {{end}}
                 {{end}}
