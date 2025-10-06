@@ -51,17 +51,20 @@
             </div>
 
             {{ $links := $page.Params.links }}
-            {{ if $links }}
-            <div class="section-3  w-100">
-                {{range $link_name, $link_url := $links}}
-                    {{ if $link_url }}
-                <a class="main_color text-decoration-none rounded" href="{{$link_url}}" target="_blank">
-                {{ $link_name | title}}
-                </a>
-                    {{end}}
+        {{ if $links }}
+        <div class="section-3 text-muted w-100">
+            Links: {{range $link_name, $link_url := $links}}
+                {{ if $link_url }}
+            <a class="main_color text-decoration-none rounded" href="{{$link_url}}" target="_blank">
+                {{ $link_name := $link_name}}
+                {{ $link_name_length := len $link_name }}
+                {{ $link_name_sub := substr $link_name 4 $link_name_length }}
+                 {{ $link_name_sub | }}
+            </a>
                 {{end}}
-            </div>
             {{end}}
+        </div>
+        {{end}}
 
             {{ $media := $page.Params.media }}
             {{ if $media }}

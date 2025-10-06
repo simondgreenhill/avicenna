@@ -6,7 +6,7 @@
 
 {{ $content_type := .Params.content_type }}
 {{ if not $content_type }}
-NO CONTENT TYPE FOUND. Set content_type = "{{.Params.title | lower }}"
+NO CONTENT TYPE FOUND. Set content_type = "{{.Params.title}}"
 {{ end }}
 
 {{ $title := .Params.title }}
