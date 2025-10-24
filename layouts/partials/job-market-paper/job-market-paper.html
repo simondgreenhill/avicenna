@@ -1,0 +1,92 @@
+{{ $content_type := .Params.content_type }}
+{{ if $content_type }}
+
+  {{/* Support either a section path ("job-market-paper") or "/job-market-paper" */}}
+  {{ $t := or (site.GetPage $content_type) (site.GetPage (printf "/%s" $content_type)) }}
+
+  {{/* Collect pages from a real section or (fallback) a headless/leaf bundle */}}
+  {{ $rscPages := slice }}
+  {{ if $t }}
+    {{ if $t.IsSection }}
+      {{ $rscPages = $t.RegularPages }}
+    {{ else }}
+      {{ $rscPages = $t.Resources.ByType "page" }}
+    {{ end }}
+  {{ end }}
+
+  {{ if gt (len $rscPages) 0 }}
+  <div class="projects row w-100">
+    <div class="col w-100">
+
+      {{ range $page := $rscPages }}
+      <div class="project row w-100">
+
+        {{/* --- Title / status / outlet (publication) --- */}}
+        <div class="section-1 w-100">
+          {{ $title := or $page.Params.title $page.Title }}
+          {{ $link  := or $page.Params.publication_link $page.Params.project_link $page.RelPermalink }}
+
+          {{ if $link -}}
+            <a class="link_color" href="{{ $link }}">{{ $title }}</a>
+          {{- else -}}
+            {{ $title }}
+          {{- end }}
+
+          {{/* show "(status <italic>publication</italic>)" if provided */}}
+          {{- if or $page.Params.status $page.Params.publication -}} (
+            {{- with $page.Params.status -}}{{ . | markdownify }}{{- end -}}
+            {{- if and $page.Params.status $page.Params.publication -}} {{ end -}}
+            {{- with $page.Params.publication -}}<span class='italic'> {{ . }}</span>{{- end -}}
+          ).
+          {{- end -}}
+        </div>
+
+        {{/* --- Authors with "Simon Greenhill" highlighted --- */}}
+        <div class="section-2 text-muted w-100">
+          {{ $authors := $page.Params.authors }}
+          {{ if $authors }}
+            {{ range $i, $author := $authors }}
+              {{- if strings.HasPrefix $author "Simon Greenhill" -}}
+                <span class="me">{{ $author }}</span>
+              {{- else -}}
+                <span>{{ $author }}</span>
+              {{- end -}}
+              {{- if lt $i (sub (len $authors) 1) -}}<span class="separator">, </span>{{- end -}}
+            {{ end }}
+          {{ end }}
+        </div>
+
+        {{/* --- Links map (pretty labels) --- */}}
+        {{ $links := $page.Params.links }}
+        {{ if $links }}
+          <div class="section-3 text-muted w-100">
+            Links:
+            {{ range $link_name, $link_url := $links }}
+              {{ if $link_url }}
+                {{/* If key starts with "url_", drop it; otherwise use as-is, then Title-case */}}
+                {{ $ln := printf "%v" $link_name }}
+                {{ $label := cond (strings.HasPrefix $ln "url_") (substr $ln 4) $ln }}
+                <a class="main_color text-decoration-none rounded" href="{{ $link_url }}" target="_blank">{{ $label | title }}</a>
+              {{ end }}
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{/* --- Media list (optional) --- */}}
+        {{ $media := $page.Params.media }}
+        {{ if $media }}
+          <div class="w-100">
+            Selected media coverage:
+            {{- range $i, $item := $media -}}
+              <a class="link_color" href="{{ $item.url }}" target="_blank">{{ $item.name | default "Link" }}</a>{{- if ne $i (sub (len $media) 1) -}}, {{ end -}}
+            {{- end -}}
+          </div>
+        {{ end }}
+
+      </div>
+      {{ end }}
+
+    </div>
+  </div>
+  {{ end }}
+{{ end }}
