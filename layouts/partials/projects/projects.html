@@ -10,25 +10,14 @@
         <div class="project row  w-100">
 
             {{/* --- Start of updated title section --- */}}
-            {{if $page.Params.publication}}
-                <div class="section-1 w-100">
-                    {{ if $page.Params.project_link -}}
-                        <a class="link_color" href="{{ $page.Params.project_link }}">{{ $page.Params.title }}</a>
-                    {{- else -}}
-                        {{ $page.Params.title }}
-                    {{- end }} ({{$page.Params.status | markdownify}}<span class='italic'> {{$page.Params.publication}}</span>).
-                </div>
-                <div></div>
-            {{else}}
-                <div class="section-1 w-100">
-                    {{ if $page.Params.project_link -}}
-                        <a class="link_color" href="{{ $page.Params.project_link }}">{{ $page.Params.title }}</a>
-                    {{- else -}}
-                        {{ $page.Params.title }}
-                    {{- end }} ({{$page.Params.status | markdownify}}).
-                </div>
-                <div></div>
-            {{end}}
+            <div class="section-1 w-100">
+                {{ if $page.Params.project_link -}}
+                    <a class="link_color" href="{{ $page.Params.project_link }}">{{ $page.Params.title }}</a>
+                {{- else -}}
+                    {{ $page.Params.title }}
+                {{- end }}{{ with $page.Params.publication }} (<span class='italic'>{{ . }}</span>){{ end }}
+            </div>
+            <div></div>
             {{/* --- End of updated title section --- */}}
 
 
