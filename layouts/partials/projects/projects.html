@@ -15,7 +15,13 @@
                     <a class="link_color" href="{{ $page.Params.project_link }}">{{ $page.Params.title }}</a>
                 {{- else -}}
                     {{ $page.Params.title }}
-                {{- end }}{{ with $page.Params.publication }} (<span class='italic'>{{ . }}</span>){{ end }}
+                {{- end }}
+                {{- /* show "(status <italic>publication</italic>)"; either part may be omitted */ -}}
+                {{- if or $page.Params.status $page.Params.publication }} (
+                    {{- with $page.Params.status }}{{ . | markdownify }}{{ end -}}
+                    {{- if and $page.Params.status $page.Params.publication }} {{ end -}}
+                    {{- with $page.Params.publication }}<span class='italic'>{{ . }}</span>{{ end -}}
+                ){{- end }}
             </div>
             <div></div>
             {{/* --- End of updated title section --- */}}
